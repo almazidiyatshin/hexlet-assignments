@@ -7,7 +7,7 @@ import java.util.Set;
 // BEGIN
 class App {
     public static void swapKeyValue(KeyValueStorage storage) {
-        var copy = new HashMap<String, String>(storage.toMap());
+        var copy = new Map<String, String>(storage.toMap());
         var entries = copy.toMap().entrySet();
 
         for (var entry : entries) {
