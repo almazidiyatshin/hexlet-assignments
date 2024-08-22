@@ -11,7 +11,7 @@ class Flat implements Home {
     }
 
     public String toString() {
-        return "Квартира площадью " + area + " метров на " + floor + " этаже"
+        return "Квартира площадью " + area + " метров на " + floor + " этаже";
     }
 
     public double getArea() {
