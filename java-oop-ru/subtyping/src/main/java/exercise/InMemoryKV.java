@@ -10,11 +10,11 @@ class InMemoryKV implements KeyValueStorage {
         this.map = map;
     }
 
-    public set(String key, String value) {
+    public void set(String key, String value) {
         this.map.put(key, value);
     }
 
-    public unset(String key) {
+    public void unset(String key) {
         this.map.remove(key);
     }
 
