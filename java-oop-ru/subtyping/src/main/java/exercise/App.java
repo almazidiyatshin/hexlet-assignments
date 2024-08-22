@@ -10,7 +10,7 @@ import java.util.HashMap;
 class App {
     public static void swapKeyValue(KeyValueStorage storage) {
         var copy = new HashMap<String, String>(storage.toMap());
-        var entries = copy.toMap().entrySet();
+        var entries = copy.entrySet();
 
         for (var entry : entries) {
             var key = entry.getKey();
