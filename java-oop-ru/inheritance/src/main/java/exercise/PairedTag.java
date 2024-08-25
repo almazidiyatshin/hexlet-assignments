@@ -17,6 +17,7 @@ class PairedTag extends Tag {
 
     @Override
     public String toString() {
+        String attrs = this.attrsToString();
         StringBuilder stringedChildren = new StringBuilder();
 
         for (var child : children) {

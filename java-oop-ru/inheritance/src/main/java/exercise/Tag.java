@@ -13,7 +13,25 @@ abstract class Tag {
         this.attributes = attributes;
     }
 
+    public String attrsToString() {
+        StringBuilder attrs = new StringBuilder();
+
+        for (var entry : attributes.entrySet()) {
+            attrs.append(entry.getKey())
+                    .append("=\"")
+                    .append(entry.getValue())
+                    .append("\" ");
+        }
+
+        String trimmedAttrs = attrs.toString().trim();
+
+        return trimmedAttrs.isEmpty() ? "" : " " + trimmedAttrs;
+    }
+
     @Override
-    public abstract String toString();
+    public String toString() {
+        String attrs = attrsToString();
+        return "<" + tagName + attrs + ">";
+    };
 }
 // END
