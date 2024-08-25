@@ -18,9 +18,9 @@ class SingleTag extends Tag {
                     .append("\" ");
         }
 
-        String trimmedAttrs = " " + attrs.toString().trim();
+        String trimmedAttrs = attrs.toString().trim();
 
-        return "<" + tagName + trimmedAttrs + ">";
+        eturn "<" + tagName + (trimmedAttrs.isEmpty() ? "" : " " + trimmedAttrs) + ">";
     }
 }
 // END
