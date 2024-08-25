@@ -20,7 +20,7 @@ class SingleTag extends Tag {
 
         String trimmedAttrs = attrs.toString().trim();
 
-        eturn "<" + tagName + (trimmedAttrs.isEmpty() ? "" : " " + trimmedAttrs) + ">";
+        return "<" + tagName + (trimmedAttrs.isEmpty() ? "" : " " + trimmedAttrs) + ">";
     }
 }
 // END
