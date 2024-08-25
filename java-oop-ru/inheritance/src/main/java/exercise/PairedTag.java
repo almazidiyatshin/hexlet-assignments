@@ -18,7 +18,7 @@ class PairedTag extends Tag {
     public String toString() {
         StringBuilder stringedChildren = new StringBuilder();
 
-        for (child : children) {
+        for (var child : children) {
             StringBuilder.append(child.toString());
         }
 

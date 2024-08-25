@@ -11,7 +11,7 @@ class SingleTag extends Tag {
     public String toString() {
         StringBuilder attrs = new StringBuilder();
 
-        for (entry : this.attributes.entrySet()) {
+        for (var entry : this.attributes.entrySet()) {
             attrs.append(entry.getKey())
                     .append("=\"")
                     .append(entry.getValue())
