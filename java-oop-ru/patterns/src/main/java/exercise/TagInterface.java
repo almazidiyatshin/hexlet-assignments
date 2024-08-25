@@ -1,7 +1,7 @@
 package exercise;
 
 // BEGIN
-class TagInterface {
+interface TagInterface {
     String render();
 }
 // END
