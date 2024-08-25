@@ -19,7 +19,7 @@ class PairedTag extends Tag {
         StringBuilder stringedChildren = new StringBuilder();
 
         for (var child : children) {
-            StringBuilder.append(child.toString());
+            stringedChildren.append(child.toString());
         }
 
         return "<" + tagName + ">" + body + stringedChildren + "</" + tagName + ">";
