@@ -13,6 +13,7 @@ abstract class Tag {
         this.attributes = attributes;
     }
 
-    abstract String toString();
+    @Override
+    public abstract String toString();
 }
 // END
