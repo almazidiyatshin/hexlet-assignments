@@ -18,7 +18,7 @@ class SingleTag extends Tag {
                     .append("\" ");
         }
 
-        return "<" + tagName + " " + attr + ">";
+        return "<" + tagName + " " + attrs + ">";
     }
 }
 // END
