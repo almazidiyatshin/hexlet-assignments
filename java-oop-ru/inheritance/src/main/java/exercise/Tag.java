@@ -12,5 +12,7 @@ abstract class Tag {
         this.tagName = tagName;
         this.attributes = attributes;
     }
+
+    abstract String toString();
 }
 // END

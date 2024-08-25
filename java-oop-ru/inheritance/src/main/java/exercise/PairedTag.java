@@ -15,6 +15,7 @@ class PairedTag extends Tag {
         this.children = children;
     }
 
+    @Override
     public String toString() {
         StringBuilder stringedChildren = new StringBuilder();
 

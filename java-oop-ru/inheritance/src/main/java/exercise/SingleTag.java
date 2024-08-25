@@ -8,6 +8,7 @@ class SingleTag extends Tag {
         super(tagName, attributes);
     }
 
+    @Override
     public String toString() {
         StringBuilder attrs = new StringBuilder();
 
