@@ -24,7 +24,7 @@ class PairedTag extends Tag {
             stringedChildren.append(child.toString());
         }
 
-        return "<" + tagName + ">" + body + stringedChildren + "</" + tagName + ">";
+        return "<" + tagName + attrs + ">" + body + stringedChildren + "</" + tagName + ">";
     }
 }
 // END
