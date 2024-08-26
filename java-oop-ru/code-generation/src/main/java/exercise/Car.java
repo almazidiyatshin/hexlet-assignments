@@ -4,6 +4,11 @@ import lombok.Value;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 // BEGIN
+import java.io.IOException;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 @Value
 // END
 class Car {
@@ -17,7 +22,7 @@ class Car {
     public String serialize() {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            var result = ObjectMapper.writeValueAsString(this);
+            var result = mapper.writeValueAsString(this);
             return result;
         } catch (JsonProcessingException e) {
             System.out.println("Error!");
@@ -27,7 +32,7 @@ class Car {
     public static Car deserialize(String json) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            var result = ObjectMapper.readValue(json, Car);
+            var result = mapper.readValue(json, Car);
             return result;
         } catch (IOException | JsonParseException | JsonMappingException e) {
             System.out.println("Error!");

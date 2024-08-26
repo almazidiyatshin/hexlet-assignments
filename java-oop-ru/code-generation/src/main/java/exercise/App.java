@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
 // BEGIN
+import java.io.IOException;
+
 class App {
     public static void save(Path path, Car car) {
         var string = car.serialize();
@@ -19,7 +21,7 @@ class App {
     public static Car extract(Path path) {
         try {
             var string = Files.readString(path);
-            return car.deserialize(string);
+            return Car.deserialize(string);
         } catch (IOException e) {
             System.out.println("Error!");
         }
