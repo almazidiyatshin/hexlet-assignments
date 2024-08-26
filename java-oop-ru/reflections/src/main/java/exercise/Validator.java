@@ -14,7 +14,7 @@ class Validator {
                 if (field.isAnnotationPresent(NotNull.class)) {
                     String value = field.get(address);
 
-                    if (value != null) {
+                    if (value == null) {
                         result.add(field.getName());
                     }
                 }
