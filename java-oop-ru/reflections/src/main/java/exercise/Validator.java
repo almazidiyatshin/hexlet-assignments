@@ -18,8 +18,8 @@ class Validator {
                         result.add(field.getName());
                     }
                 }
-            } catch (e) {
-                System.out.println('Error');
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
             }
         }
 
