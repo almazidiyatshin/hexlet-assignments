@@ -2,6 +2,9 @@ package exercise;
 
 import java.lang.reflect.Field;
 // BEGIN
+import java.util.ArrayList;
+import java.util.List;
+
 class Validator {
     public static List<String> validate(Address address) {
         List<String> result = new ArrayList<String>();
@@ -12,7 +15,7 @@ class Validator {
 
             try {
                 if (field.isAnnotationPresent(NotNull.class)) {
-                    String value = field.get(address);
+                    var value = field.get(address);
 
                     if (value == null) {
                         result.add(field.getName());
