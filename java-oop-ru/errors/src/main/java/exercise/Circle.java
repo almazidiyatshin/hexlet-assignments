@@ -18,7 +18,7 @@ class Circle {
         var square = Math.PI * Math.pow(radius, 2);
 
         if (square < 0) {
-            throw new NegativeRadiusException("");
+            throw new NegativeRadiusException("Error");
         }
 
         return square;
