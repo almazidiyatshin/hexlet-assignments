@@ -35,6 +35,7 @@ class Car {
             return result;
         } catch (IOException e) {
             System.out.println("Error!");
+            return null;
         }
     }
     // END
