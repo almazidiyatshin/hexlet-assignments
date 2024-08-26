@@ -20,7 +20,7 @@ class Car {
             var result = ObjectMapper.writeValueAsString(this);
             return result;
         } catch (JsonProcessingException e) {
-            System.out.println('Error!');
+            System.out.println("Error!");
         }
     }
 
@@ -30,7 +30,7 @@ class Car {
             var result = ObjectMapper.readValue(json, Car);
             return result;
         } catch (IOException | JsonParseException | JsonMappingException e) {
-            System.out.println('Error!');
+            System.out.println("Error!");
         }
     }
     // END
