@@ -5,8 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 // BEGIN
 import java.io.IOException;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Value
@@ -32,9 +30,9 @@ class Car {
     public static Car deserialize(String json) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            var result = mapper.readValue(json, Car);
+            var result = mapper.readValue(json, this);
             return result;
-        } catch (IOException | JsonParseException | JsonMappingException e) {
+        } catch (IOException e) {
             System.out.println("Error!");
         }
     }
