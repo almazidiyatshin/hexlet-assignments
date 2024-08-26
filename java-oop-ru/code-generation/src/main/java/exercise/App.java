@@ -19,7 +19,7 @@ class App {
     }
 
     public static Car extract(Path path) {
-        var result = null;
+        Car result = null;
         try {
             var string = Files.readString(path);
             result = Car.deserialize(string);
