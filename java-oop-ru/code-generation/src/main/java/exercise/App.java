@@ -19,12 +19,15 @@ class App {
     }
 
     public static Car extract(Path path) {
+        Car result;
         try {
             var string = Files.readString(path);
-            return Car.deserialize(string);
+            result = Car.deserialize(string);
         } catch (IOException e) {
             System.out.println("Error!");
         }
+
+        return result;
     }
 }
 // END

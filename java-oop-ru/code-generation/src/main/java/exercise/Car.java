@@ -30,7 +30,7 @@ class Car {
     public static Car deserialize(String json) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            var result = mapper.readValue(json, this);
+            var result = mapper.readValue(json, this.getClass());
             return result;
         } catch (IOException e) {
             System.out.println("Error!");
