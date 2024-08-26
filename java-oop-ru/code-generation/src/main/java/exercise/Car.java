@@ -24,13 +24,14 @@ class Car {
             return result;
         } catch (JsonProcessingException e) {
             System.out.println("Error!");
+            return null;
         }
     }
 
     public static Car deserialize(String json) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            var result = mapper.readValue(json, this.getClass());
+            var result = mapper.readValue(json, Car.class);
             return result;
         } catch (IOException e) {
             System.out.println("Error!");
