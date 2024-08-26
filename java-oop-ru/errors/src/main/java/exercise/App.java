@@ -8,7 +8,7 @@ class App {
             System.out.println(Math.round(square));
         } catch (NegativeRadiusException e) {
             System.out.println("Не удалось посчитать площадь.");
-        } final {
+        } finally {
             System.out.println("Вычисление окончено.");
         }
     }
