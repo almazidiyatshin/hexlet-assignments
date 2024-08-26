@@ -9,7 +9,7 @@ class App {
         } catch (NegativeRadiusException e) {
             System.out.println("Не удалось посчитать площадь.");
         } finally {
-            System.out.println("Вычисление окончено.");
+            System.out.println("Вычисление окончено");
         }
     }
 }
