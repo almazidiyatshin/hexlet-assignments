@@ -20,9 +20,9 @@ public class UsersController {
     // BEGIN
     public static void register(Context ctx) {
         var firstName = ctx.formParam("firstName");
-        var lastName = ctx.formParam("firstName");
-        var email = ctx.formParam("firstName");
-        var password = ctx.formParam("firstName");
+        var lastName = ctx.formParam("lastName");
+        var email = ctx.formParam("email");
+        var password = ctx.formParam("password");
         var token = Security.generateToken();
 
         var user = new User(firstName, lastName, email, password, token);
