@@ -40,10 +40,7 @@ public class Application {
     @GetMapping("/posts/{id}")
     public ResponseEntity<Post> getPost(@PathVariable String id) {
         var post = posts.stream().filter(value -> value.getId().equals(id)).findFirst();
-        if (post.isPresent()) {
-            return ResponseEntity.ok(post.get());
-        }
-        return ResponseEntity.status(404).build();
+        return ResponseEntity.of(post);
     }
 
     @PostMapping("/posts")
