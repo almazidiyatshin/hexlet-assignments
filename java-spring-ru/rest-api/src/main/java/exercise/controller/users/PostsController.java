@@ -17,11 +17,11 @@ import exercise.Data;
 @RestController
 @RequestMapping("/api")
 public class PostsController {
+    List<Post> posts = Data.getPosts();
 
     @GetMapping("/users/{id}/posts")
     public List<Post> get(@PathVariable String id) {
-        var result = Data
-                .getPosts()
+        var result = posts
                 .stream()
                 .filter(value -> value.getUserId() == Integer.parseInt(id))
                 .toList();
@@ -33,6 +33,7 @@ public class PostsController {
     @ResponseStatus(HttpStatus.CREATED)
     public Post post(@PathVariable String id, @RequestBody Post post) {
         post.setUserId(Integer.parseInt(id));
+        posts.add(post);
         return post;
     }
 }
