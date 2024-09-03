@@ -22,13 +22,19 @@ public class Application {
 
     // BEGIN
     @Autowired
-    private UserProperties admins;
+    private UserProperties adminsInfo;
 
     @GetMapping("/admins")
     public List<String> getAdmins() {
-        var copy = admins.getAdmins();
-        copy.sort((a, b) -> a.compareTo(b));
-        return copy;
+        var adminEmails = adminsInfo.getAdmins();
+
+        var result = users.stream()
+                .filter(user -> adminEmails.contains(user.getEmail()))
+                .map(User::getName)
+                .sorted()
+                .toList();
+
+        return result;
     }
     // END
 
