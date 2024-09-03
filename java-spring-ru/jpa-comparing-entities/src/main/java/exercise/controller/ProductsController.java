@@ -34,7 +34,7 @@ public class ProductsController {
     // BEGIN
     @PostMapping(path = "")
     public Product create(@RequestBody Product product) {
-        if (productRepository.existsById(product.getId())) {
+        if (product.getId() != null && productRepository.existsById(product.getId())) {
             throw new ResourceAlreadyExistsException("Product with id " + product.getId() + " is already exists");
         }
 
