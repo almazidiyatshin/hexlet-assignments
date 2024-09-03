@@ -34,6 +34,7 @@ public class PeopleController {
         return personRepository.findAll();
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Person create(@RequestBody Person person) {
         personRepository.save(person);
