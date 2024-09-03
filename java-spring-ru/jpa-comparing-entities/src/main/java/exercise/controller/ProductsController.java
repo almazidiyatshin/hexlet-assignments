@@ -32,6 +32,7 @@ public class ProductsController {
     }
 
     // BEGIN
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "")
     public Product create(@RequestBody Product product) {
         if (product.getId() != null && productRepository.existsById(product.getId())) {
