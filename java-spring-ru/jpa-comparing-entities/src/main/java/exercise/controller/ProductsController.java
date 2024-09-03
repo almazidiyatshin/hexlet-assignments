@@ -34,20 +34,26 @@ public class ProductsController {
     // BEGIN
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "")
-    public Product create(@RequestBody Product product) {
-        if (product.getId() != null && productRepository.existsById(product.getId())) {
-            throw new ResourceAlreadyExistsException("Product with id " + product.getId() + " is already exists");
+    public Product create(@RequestBody Product productData) {
+        var maybeProduct = productRepository.findById(productData.getId());
+
+        if (maybeProduct.isPresent()) {
+            if (maybeProduct.equals(productData)) {
+                throw new ResourceAlreadyExistsException("Product is already exists");
+            } else {
+                productRepository.save(maybeProduct.get());
+            }
+        } else {
+            productRepository.save(productData);
         }
 
-        productRepository.save(product);
-
-        return product;
+        return productData;
     }
     // END
 
     @GetMapping(path = "/{id}")
     public Product show(@PathVariable long id) {
-        var product =  productRepository.findById(id)
+        var product = productRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found"));
 
         return product;
