@@ -38,6 +38,8 @@ public class ProductsController {
             throw new ResourceAlreadyExistsException("Product with id " + product.getId() + " is already exists");
         }
 
+        productRepository.save(product);
+
         return product;
     }
     // END
