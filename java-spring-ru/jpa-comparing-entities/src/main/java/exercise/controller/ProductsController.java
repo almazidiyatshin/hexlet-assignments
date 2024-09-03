@@ -38,16 +38,14 @@ public class ProductsController {
         var maybeProduct = productRepository.findById(productData.getId());
 
         if (maybeProduct.isPresent()) {
-            if (maybeProduct.equals(productData)) {
+            if (maybeProduct.get().equals(productData)) {
                 throw new ResourceAlreadyExistsException("Product is already exists");
             } else {
-                productRepository.save(maybeProduct.get());
+                return productRepository.save(productData);
             }
         } else {
-            productRepository.save(productData);
+            return productRepository.save(productData);
         }
-
-        return productData;
     }
     // END
 
