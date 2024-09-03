@@ -29,18 +29,18 @@ public class PeopleController {
     }
 
     // BEGIN
-    @GetMapping(path = "/people")
+    @GetMapping
     public List<Person> index() {
         return personRepository.findAll();
     }
 
-    @PostMapping(path = "/people")
+    @PostMapping
     public Person create(@RequestBody Person person) {
         personRepository.save(person);
         return person;
     }
 
-    @DeleteMapping(path = "/people/${id}")
+    @DeleteMapping(path = "/{id}")
     public void destroy(@PathVariable Long id) {
         personRepository.deleteById(id);
     }
