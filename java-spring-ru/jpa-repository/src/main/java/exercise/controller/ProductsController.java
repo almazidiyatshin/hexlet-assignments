@@ -23,7 +23,7 @@ public class ProductsController {
 
     // BEGIN
     @GetMapping(path = "")
-    public List<Product> index(@RequestParam Integer min, @RequestParam Integer max) {
+    public List<Product> index(@RequestParam(required = false) Integer min, @RequestParam (required = false) Integer max) {
         List<Product> products = productRepository.findAll();
 
         if (min != null && max != null) {
