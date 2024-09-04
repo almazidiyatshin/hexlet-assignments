@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import exercise.daytime.Daytime;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@RestController("/welcome")
+@RestController
 public class WelcomeController {
 
     @Autowired
     private Daytime daytime;
 
-    @GetMapping(path = "")
+    @GetMapping(path = "/welcome")
     public String hello() {
         return "It is " + daytime.getName() + " now! Welcome to Spring!";
     }
