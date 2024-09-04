@@ -33,6 +33,6 @@ public class Task {
     private LocalDate createdAt;
 
     @LastModifiedDate
-    private LocalDate updateddAt;
+    private LocalDate updatedAt;
 }
 // END
