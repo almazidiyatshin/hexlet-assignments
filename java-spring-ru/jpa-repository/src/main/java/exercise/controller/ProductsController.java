@@ -31,7 +31,7 @@ public class ProductsController {
         }
 
         if (min != null && max == null) {
-            products = productRepository.findByPriceMoreThan(min);
+            products = productRepository.findByPriceGreaterThan(min);
         }
 
         if (min == null && max != null) {
