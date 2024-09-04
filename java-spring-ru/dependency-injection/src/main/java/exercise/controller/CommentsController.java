@@ -33,18 +33,22 @@ public class CommentsController {
 
     @GetMapping(path = "/{id}")
     public Comment show(@PathVariable long id) {
-        return commentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Not found"));
+        return commentRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Comment with id " + id + " not found"));
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(path = "/{id}")
+    @PostMapping(path = "")
     public Comment create(@RequestBody Comment commentData) {
         return commentRepository.save(commentData);
     }
 
     @PutMapping(path = "/{id}")
     public Comment update(@PathVariable long id, @RequestBody Comment commentData) {
-        var existingComment = commentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Not found"));
+        var existingComment = commentRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Comment with id " + id + " not found"));
         existingComment.setPostId(commentData.getPostId());
         existingComment.setBody(commentData.getBody());
         return existingComment;

@@ -36,18 +36,20 @@ public class PostsController {
 
     @GetMapping(path = "/{id}")
     public Post show(@PathVariable long id) {
-        return postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Not found"));
+        return postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post with id " + id + " not found"));
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(path = "/{id}")
+    @PostMapping(path = "")
     public Post create(@RequestBody Post postData) {
         return postRepository.save(postData);
     }
 
     @PutMapping(path = "/{id}")
     public Post update(@PathVariable long id, @RequestBody Post postData) {
-        var existingPost = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Not found"));
+        var existingPost = postRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Post with id " + id + " not found"));
         existingPost.setTitle(postData.getTitle());
         existingPost.setBody(postData.getBody());
         return existingPost;
