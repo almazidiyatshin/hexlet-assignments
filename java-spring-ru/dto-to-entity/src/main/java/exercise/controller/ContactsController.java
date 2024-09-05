@@ -21,6 +21,7 @@ public class ContactsController {
     private ContactRepository contactRepository;
 
     // BEGIN
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "")
     public ContactDTO create(@RequestBody ContactCreateDTO contactCreateDTO) {
         var contact = toEntity(contactCreateDTO);
