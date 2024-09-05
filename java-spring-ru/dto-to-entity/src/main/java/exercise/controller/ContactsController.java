@@ -31,6 +31,7 @@ public class ContactsController {
 
     private ContactDTO toDTO(Contact contact) {
         var dto = new ContactDTO();
+        dto.setId(contact.getId());
         dto.setFirstName(contact.getFirstName());
         dto.setLastName(contact.getLastName());
         dto.setPhone(contact.getPhone());
