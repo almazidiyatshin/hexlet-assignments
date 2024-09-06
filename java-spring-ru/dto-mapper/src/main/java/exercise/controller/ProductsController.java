@@ -51,8 +51,7 @@ public class ProductsController {
     }
 
     @PutMapping(path = "/{id}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ProductDTO create(@PathVariable Long id, @RequestBody ProductUpdateDTO productUpdateDTO) {
+    public ProductDTO update(@PathVariable Long id, @RequestBody ProductUpdateDTO productUpdateDTO) {
         var product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found"));
         productMapper.update(productUpdateDTO, product);
