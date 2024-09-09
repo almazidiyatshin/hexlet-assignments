@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import exercise.exception.ResourceNotFoundException;
 import exercise.repository.ProductRepository;
 import jakarta.validation.Valid;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/products")
@@ -54,7 +55,7 @@ public class ProductsController {
         var categoryId = createDTO.getCategoryId();
 
         if (!categoryRepository.existsById(categoryId)) {
-            throw new ResourceNotFoundException("Category with id " + categoryId + " not found");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Category with id " + categoryId + " not found");
         }
 
         productRepository.save(product);
@@ -68,7 +69,7 @@ public class ProductsController {
         var categoryId = updateDTO.getCategoryId();
 
         if (categoryId.isPresent() && !categoryRepository.existsById(categoryId.get())) {
-            throw new ResourceNotFoundException("Category with id " + categoryId + " not found");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Category with id " + categoryId + " not found");
         }
 
         productMapper.update(updateDTO, product);
