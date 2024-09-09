@@ -31,8 +31,8 @@ public class ProductsController {
 
     @Autowired
     private ProductMapper productMapper;
-    @Autowired
-    private CategoryRepository categoryRepository;
+//    @Autowired
+//    private CategoryRepository categoryRepository;
 
     // BEGIN
     @GetMapping(path = "")
