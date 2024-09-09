@@ -50,7 +50,7 @@ public class TasksController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "")
-    public TaskDTO create(@RequestBody @Valid TaskCreateDTO createDTO) {
+    public TaskDTO create(@Valid @RequestBody TaskCreateDTO createDTO) {
         var task = taskMapper.map(createDTO);
         var assigneeId = createDTO.getAssigneeId();
         var assignee = userRepository.findById(assigneeId)
@@ -61,13 +61,9 @@ public class TasksController {
     }
 
     @PutMapping(path = "/{id}")
-    public TaskDTO update(@PathVariable Long id, @RequestBody @Valid TaskUpdateDTO updateDTO) {
+    public TaskDTO update(@PathVariable Long id, @Valid @RequestBody TaskUpdateDTO updateDTO) {
         var task = taskRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Task with id " + id + " not found"));
-        var assigneeId = updateDTO.getAssigneeId();
-        var assignee = userRepository.findById(assigneeId)
-                .orElseThrow(() -> new ResourceNotFoundException("User with id " + assigneeId + " not found"));
-        task.setAssignee(assignee);
         taskMapper.update(updateDTO, task);
         return taskMapper.map(task);
     }
