@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import exercise.exception.ResourceNotFoundException;
 import exercise.repository.ProductRepository;
 import jakarta.validation.Valid;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/products")
@@ -52,11 +51,11 @@ public class ProductsController {
     @PostMapping(path = "")
     public ProductDTO create(@Valid @RequestBody ProductCreateDTO createDTO) {
         var product = productMapper.map(createDTO);
-        var categoryId = createDTO.getCategoryId();
-
-        if (!categoryRepository.existsById(categoryId)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Category with id " + categoryId + " not found");
-        }
+//        var categoryId = createDTO.getCategoryId();
+//
+//        if (!categoryRepository.existsById(categoryId)) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Category with id " + categoryId + " not found");
+//        }
 
         productRepository.save(product);
         return productMapper.map(product);
@@ -66,11 +65,11 @@ public class ProductsController {
     public ProductDTO update(@PathVariable Long id, @Valid @RequestBody ProductUpdateDTO updateDTO) {
         var product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found"));
-        var categoryId = updateDTO.getCategoryId();
-
-        if (categoryId.isPresent() && !categoryRepository.existsById(categoryId.get())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Category with id " + categoryId + " not found");
-        }
+//        var categoryId = updateDTO.getCategoryId();
+//
+//        if (categoryId.isPresent() && !categoryRepository.existsById(categoryId.get())) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Category with id " + categoryId + " not found");
+//        }
 
         productMapper.update(updateDTO, product);
         productRepository.save(product);
