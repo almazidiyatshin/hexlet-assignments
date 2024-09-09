@@ -38,7 +38,7 @@ public class Guest {
     private String email;
 
     @Size(min = 11, max = 13)
-    @Pattern(regexp = "^\\+.*$")
+    @Pattern(regexp = "^\\+\\d+$")
     private String phoneNumber;
 
     @Size(min = 4, max = 4)
