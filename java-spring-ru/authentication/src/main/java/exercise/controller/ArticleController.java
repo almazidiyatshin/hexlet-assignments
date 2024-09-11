@@ -39,11 +39,10 @@ public class ArticleController {
     @Autowired
     private UserUtils userUtils;
 
-
     // BEGIN
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public ArticleDTO createArticle(@RequestBody @Valid ArticleCreateDTO articleCreateDTO) {
+    public ArticleDTO create(@RequestBody @Valid ArticleCreateDTO articleCreateDTO) {
         var article = articleMapper.map(articleCreateDTO);
         var currentUser = userUtils.getCurrentUser();
         article.setAuthor(currentUser);
