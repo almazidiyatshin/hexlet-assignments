@@ -1,11 +1,9 @@
 package exercise.service;
 
-import exercise.model.User;
 import exercise.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +13,6 @@ public class CustomUserDetailsService implements UserDetailsManager {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         var user = userRepository.findByEmail(email)
@@ -26,12 +21,9 @@ public class CustomUserDetailsService implements UserDetailsManager {
     }
 
     @Override
-    public void createUser(UserDetails userData) {
-        var user = new User();
-        user.setEmail(userData.getUsername());
-        var hashedPassword = passwordEncoder.encode(userData.getPassword());
-        user.setPasswordDigest(hashedPassword);
-        userRepository.save(user);
+    public void createUser(UserDetails user) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateUser'");
     }
 
     @Override
