@@ -19,8 +19,10 @@ class App {
                 }
 
                 return Files.readString(path);
+            } catch (NoSuchFileException e) {
+                throw new RuntimeException("File not found: " + pathFrom1);
             } catch (IOException e) {
-                throw new RuntimeException("Error reading file from pathFrom1: " + e.getMessage());
+                throw new RuntimeException("Error reading file: " + pathFrom1);
             }
         });
 
@@ -33,8 +35,10 @@ class App {
                 }
 
                 return Files.readString(path);
+            } catch (NoSuchFileException e) {
+                throw new RuntimeException("File not found: " + pathFrom2);
             } catch (IOException e) {
-                throw new RuntimeException("Error reading file from pathFrom2: " + e.getMessage());
+                throw new RuntimeException("Error reading file: " + pathFrom2);
             }
         });
 
