@@ -10,51 +10,37 @@ class App {
 
     // BEGIN
     public static CompletableFuture<String> unionFiles(String pathFrom1, String pathFrom2, String pathTo) {
-        CompletableFuture<String> read1 = CompletableFuture.supplyAsync(() -> {
-            Path path = Paths.get(pathFrom1);
-
+        CompletableFuture<String> content1 = CompletableFuture.supplyAsync(() -> {
+            String content = "";
             try {
-                if (!Files.exists(path)) {
-                    throw new NoSuchFileException(pathFrom1);
-                }
-
-                return Files.readString(path);
-            } catch (NoSuchFileException e) {
-                throw new RuntimeException("NoSuchFileException");
-            } catch (IOException e) {
-                throw new RuntimeException("Error reading file: " + pathFrom1);
+                content = Files.readString(Path.of(pathFrom1));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
-        });
-
-        CompletableFuture<String> read2 = CompletableFuture.supplyAsync(() -> {
-            Path path = Paths.get(pathFrom2);
-
-            try {
-                if (!Files.exists(path)) {
-                    throw new NoSuchFileException(pathFrom2);
-                }
-
-                return Files.readString(path);
-            } catch (NoSuchFileException e) {
-                throw new RuntimeException("NoSuchFileException");
-            } catch (IOException e) {
-                throw new RuntimeException("Error reading file: " + pathFrom2);
-            }
-        });
-
-        return read1.thenCombine(read2, (file1, file2) -> {
-            String content = file1 + file2;
-
-            try {
-                Files.writeString(Path.of(pathTo), content);
-            } catch (IOException e) {
-                throw new RuntimeException("Error writing file to pathTo: " + e.getMessage());
-            }
-
             return content;
+        });
+
+        CompletableFuture<String> content2 = CompletableFuture.supplyAsync(() -> {
+            String content = "";
+            try {
+                content = Files.readString(Path.of(pathFrom2));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            return content;
+        });
+
+        return content1.thenCombine(content2, (cont1, cont2) -> {
+            String union = cont1 + cont2;
+            try {
+                Files.writeString(Path.of(pathTo), union);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            return union;
         }).exceptionally(ex -> {
             System.out.println("Oops! We have an exception - " + ex.getMessage());
-            return null;
+            return "Unknown!";
         });
     }
 
