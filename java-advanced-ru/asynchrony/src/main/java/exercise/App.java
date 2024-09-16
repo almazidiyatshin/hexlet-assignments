@@ -1,13 +1,10 @@
 package exercise;
 
 import java.io.IOException;
+import java.nio.file.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.Arrays;
-import java.nio.file.Paths;
-import java.nio.file.Path;
-import java.nio.file.Files;
 import java.io.File;
-import java.nio.file.StandardOpenOption;
 
 class App {
 
@@ -16,11 +13,11 @@ class App {
         CompletableFuture<String> read1 = CompletableFuture.supplyAsync(() -> {
             Path path = Paths.get(pathFrom1);
 
-            if (!Files.exists(path)) {
-                throw new RuntimeException("File not found: " + pathFrom1);
-            }
-
             try {
+                if (!Files.exists(path)) {
+                    throw new NoSuchFileException(pathFrom1);
+                }
+
                 return Files.readString(path);
             } catch (IOException e) {
                 throw new RuntimeException("Error reading file from pathFrom1: " + e.getMessage());
@@ -30,11 +27,11 @@ class App {
         CompletableFuture<String> read2 = CompletableFuture.supplyAsync(() -> {
             Path path = Paths.get(pathFrom2);
 
-            if (!Files.exists(path)) {
-                throw new RuntimeException("File not found: " + pathFrom2);
-            }
-
             try {
+                if (!Files.exists(path)) {
+                    throw new NoSuchFileException(pathFrom2);
+                }
+
                 return Files.readString(path);
             } catch (IOException e) {
                 throw new RuntimeException("Error reading file from pathFrom2: " + e.getMessage());
