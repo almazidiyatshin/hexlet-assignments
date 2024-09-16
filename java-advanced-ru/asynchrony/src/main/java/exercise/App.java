@@ -14,31 +14,43 @@ class App {
     // BEGIN
     public static CompletableFuture<String> unionFiles(String pathFrom1, String pathFrom2, String pathTo) {
         CompletableFuture<String> read1 = CompletableFuture.supplyAsync(() -> {
+            Path path = Paths.get(pathFrom1);
+
+            if (!Files.exists(path)) {
+                throw new RuntimeException("File not found: " + pathFrom1);
+            }
+
             try {
-                return Files.readString(Path.of(pathFrom1));
+                return Files.readString(path);
             } catch (IOException e) {
                 throw new RuntimeException("Error reading file from pathFrom1: " + e.getMessage());
             }
         });
 
         CompletableFuture<String> read2 = CompletableFuture.supplyAsync(() -> {
+            Path path = Paths.get(pathFrom2);
+
+            if (!Files.exists(path)) {
+                throw new RuntimeException("File not found: " + pathFrom2);
+            }
+
             try {
-                return Files.readString(Path.of(pathFrom2));
+                return Files.readString(path);
             } catch (IOException e) {
                 throw new RuntimeException("Error reading file from pathFrom2: " + e.getMessage());
             }
         });
 
         return read1.thenCombine(read2, (file1, file2) -> {
-            String combinedContent = file1 + file2;
+            String content = file1 + file2;
 
             try {
-                Files.writeString(Path.of(pathTo), combinedContent);
+                Files.writeString(Path.of(pathTo), content);
             } catch (IOException e) {
                 throw new RuntimeException("Error writing file to pathTo: " + e.getMessage());
             }
 
-            return combinedContent;
+            return content;
         }).exceptionally(ex -> {
             System.out.println("Oops! We have an exception - " + ex.getMessage());
             return null;
