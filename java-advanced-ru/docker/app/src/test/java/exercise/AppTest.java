@@ -24,6 +24,6 @@ public class AppTest {
             "http://localhost:" + port + "/",
             String.class
         );
-//        assertThat(body).contains("Great! We start Spring Boot application in Docker");
+        assertThat(body).contains("Great! We start Spring Boot application in Docker");
     }
 }
