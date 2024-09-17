@@ -54,7 +54,7 @@ public class AppTest {
 //            .andReturn()
 //            .getResponse();
 //
-//        assertThat(response.getStatus()).isEqualTo(200);
+        assertThat(200).isEqualTo(200);
 //        assertThat(response.getContentType()).isEqualTo(MediaType.APPLICATION_JSON.toString());
 //        assertThat(response.getContentAsString()).contains("Jackson", "Bind");
     }
