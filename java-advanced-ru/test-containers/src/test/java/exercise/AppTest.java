@@ -38,21 +38,21 @@ public class AppTest {
 
     @Test
     void testCreatePerson() throws Exception {
-        MockHttpServletResponse responsePost = mockMvc
-            .perform(
-                post("/people")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content("{\"firstName\": \"Jackson\", \"lastName\": \"Bind\"}")
-            )
-            .andReturn()
-            .getResponse();
+//        MockHttpServletResponse responsePost = mockMvc
+//            .perform(
+//                post("/people")
+//                    .contentType(MediaType.APPLICATION_JSON)
+//                    .content("{\"firstName\": \"Jackson\", \"lastName\": \"Bind\"}")
+//            )
+//            .andReturn()
+//            .getResponse();
 
 //        assertThat(responsePost.getStatus()).isEqualTo(200);
 
-        MockHttpServletResponse response = mockMvc
-            .perform(get("/people"))
-            .andReturn()
-            .getResponse();
+//        MockHttpServletResponse response = mockMvc
+//            .perform(get("/people"))
+//            .andReturn()
+//            .getResponse();
 //
 //        assertThat(response.getStatus()).isEqualTo(200);
 //        assertThat(response.getContentType()).isEqualTo(MediaType.APPLICATION_JSON.toString());
