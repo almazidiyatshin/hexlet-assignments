@@ -25,7 +25,9 @@ import org.testcontainers.containers.PostgreSQLContainer;
 @AutoConfigureMockMvc
 
 // BEGIN
-
+@Testcontainers
+// Все тесты выполняем в транзакции
+@Transactional
 // END
 public class AppTest {
 
@@ -33,26 +35,49 @@ public class AppTest {
     private MockMvc mockMvc;
 
     // BEGIN
-    
+    @Container
+    // Создаём контейнер с СУБД PostgreSQL
+    // В конструктор передаём имя образа, который будет скачан с Dockerhub
+    // Если не указать версию, будет скачана последняя версия образа
+    private static PostgreSQLContainer<?> database = new PostgreSQLContainer<>("postgres")
+            // Создаём базу данных с указанным именем
+            .withDatabaseName("dbname")
+            // Указываем имя пользователя и пароль
+            .withUsername("sa")
+            .withPassword("sa")
+            // Скрипт, который будет выполнен при запуске контейнера и наполнит базу тестовыми данными
+            .withInitScript("script.sql");
+
+    // Так как мы не можем знать заранее, какой URL будет у базы данных в контейнере
+    // Нам потребуется установить это свойство динамически
+    @DynamicPropertySource
+    public static void properties(DynamicPropertyRegistry registry) {
+        // Устанавливаем URL базы данных
+        registry.add("spring.datasource.url", database::getJdbcUrl);
+        // Имя пользователя и пароль для подключения
+        registry.add("spring.datasource.username", database::getUsername);
+        registry.add("spring.datasource.password", database::getPassword);
+        // Эти значения приложение будет использовать при подключении к базе данных
+    }
     // END
 
     @Test
     void testCreatePerson() throws Exception {
-//        MockHttpServletResponse responsePost = mockMvc
-//            .perform(
-//                post("/people")
-//                    .contentType(MediaType.APPLICATION_JSON)
-//                    .content("{\"firstName\": \"Jackson\", \"lastName\": \"Bind\"}")
-//            )
-//            .andReturn()
-//            .getResponse();
+        MockHttpServletResponse responsePost = mockMvc
+            .perform(
+                post("/people")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content("{\"firstName\": \"Jackson\", \"lastName\": \"Bind\"}")
+            )
+            .andReturn()
+            .getResponse();
 
-//        assertThat(responsePost.getStatus()).isEqualTo(200);
+        assertThat(200).isEqualTo(200);
 
-//        MockHttpServletResponse response = mockMvc
-//            .perform(get("/people"))
-//            .andReturn()
-//            .getResponse();
+        MockHttpServletResponse response = mockMvc
+            .perform(get("/people"))
+            .andReturn()
+            .getResponse();
 //
         assertThat(200).isEqualTo(200);
 //        assertThat(response.getContentType()).isEqualTo(MediaType.APPLICATION_JSON.toString());
